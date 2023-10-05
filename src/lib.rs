@@ -23,22 +23,19 @@ static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 base64 input and output
 */
 
-
 #[cfg(feature = "strings")]
 #[cfg_attr(feature = "browser", wasm_bindgen)]
-pub extern "C" fn zlib_decode(base_compressed: &str) -> String {
+pub fn zlib_decode(base_compressed: &str) -> JsValue {
     let compressed_bytes = base64::decode(&base_compressed).unwrap();
     let mut d = ZlibDecoder::new(&compressed_bytes[..]);
     let mut s = String::new();
     d.read_to_string(&mut s).unwrap();
-    return s;
+    return JsValue::from_str(s.as_str());
 }
-
-
 
 #[cfg(feature = "strings")]
 #[cfg_attr(feature = "browser", wasm_bindgen)]
-pub extern "C" fn zlib_encode(base_raw: &str) -> String {
+pub fn zlib_encode(base_raw: &str) -> String {
     let mut e = ZlibEncoder::new(Vec::new(), Compression::default());
     e.write_all(base_raw.as_bytes())
         .expect("could not compress");
