@@ -10,7 +10,7 @@ use flate2::write::GzEncoder;
 use flate2::Compression;
 use std::io::{Read, Write};
 
-#[cfg(feature = "browser")]
+// #[cfg(feature = "browser")]
 use wasm_bindgen::prelude::*;
 
 // When the `wee_alloc` feature is enabled, use `wee_alloc` as the global
@@ -25,12 +25,13 @@ base64 input and output
 
 #[cfg(feature = "strings")]
 #[cfg_attr(feature = "browser", wasm_bindgen)]
-pub fn zlib_decode(base_compressed: &str) -> JsValue {
+pub fn zlib_decode(base_compressed: &str) -> String {
     let compressed_bytes = base64::decode(&base_compressed).unwrap();
     let mut d = ZlibDecoder::new(&compressed_bytes[..]);
     let mut s = String::new();
     d.read_to_string(&mut s).unwrap();
-    return JsValue::from_str(s.as_str());
+    // return JsValue::from_str(s.as_str());
+    return s;
 }
 
 #[cfg(feature = "strings")]
