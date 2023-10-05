@@ -1,5 +1,5 @@
 {
-  "name": "wasm-flate",
+  "name": "@auser/wasm-flate",
   "version": "1.0.0",
   "description": "🗜️⚡ The fastest compression and decompression in the browser and server. Supports GZIP, ZLIB and DEFLATE",
   "main": "index.js",
